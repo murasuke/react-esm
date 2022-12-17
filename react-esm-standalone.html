@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>React-ESM-Standalone</title>
+  <script type="module">
+    // CDN経由でReactを読み込む(ESModuleであればブラウザから直接利用可能)
+    import React, { useState } from "https://cdn.skypack.dev/react";
+    import ReactDOM from "https://cdn.skypack.dev/react-dom";
+
+    const Counter = () => {
+      const [count, setCount] = useState(0);
+      const handleClick = () => setCount((n) => n + 1);
+      return (
+        // jsxはトランスパイルが必要なためReact.createElement()を直接呼び出す
+        React.createElement(React.Fragment, null,
+          React.createElement("div", null, "Count: ", count),
+          React.createElement("button", {onClick: handleClick}, "Increment"))
+      );
+    };
+    ReactDOM.render(React.createElement(Counter), document.getElementById('app'));
+  </script>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+</html>
